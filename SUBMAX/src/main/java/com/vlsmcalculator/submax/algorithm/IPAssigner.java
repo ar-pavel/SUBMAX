@@ -36,7 +36,7 @@ public class IPAssigner {
                     currentIp += hostGroupRequest.getSize()+1;
 
                     /// Calculate Gateway
-                    hostGroupResponse.setBroadcast(IPUtil.getGatewayAddress(hostGroupResponse.getNetworkAddress()));
+                    hostGroupResponse.setGatewayAddress(IPUtil.getGatewayAddress(hostGroupResponse.getNetworkAddress()));
 
                     // Calculate Broadcast
                     hostGroupResponse.setBroadcast(IPUtil.getBroadcastAddress(hostGroupResponse.getNetworkAddress(),hostGroupRequest.getSize()));
