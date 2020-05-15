@@ -24,9 +24,13 @@ public class IP {
         this.addressNotation = IPUtil.getIPNotation(this.addressValue, this.cidr);
     }
 
-    public String toString(){
-        return getAddressNotation();
-    }
+//    public String toString(){
+//        return getAddressNotation();
+//    }
+
+//    public String toString(){
+//        return getAddressNotation();
+//    }
 
 //    {
 //        "addressValue": 3422552332,

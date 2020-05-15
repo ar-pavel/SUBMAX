@@ -16,7 +16,7 @@ public class HostGroupResponse {
     private IP gatewayAddress;
     private IP broadcast;
 
-    public String toString(){
-        return "{ id: " + id + " : " + name + " need : " + size + " }";
-    }
+//    public String toString(){
+//        return "{ id: " + id + " : " + name + " need : " + size + " }";
+//    }
 }

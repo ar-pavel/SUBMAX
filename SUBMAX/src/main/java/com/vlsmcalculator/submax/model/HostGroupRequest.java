@@ -1,26 +1,23 @@
 package com.vlsmcalculator.submax.model;
 
+import com.vlsmcalculator.submax.algorithm.MathOperations;
 import lombok.*;
 
-@Data @Getter @Setter
+@Data @Getter @Setter @NoArgsConstructor
 public class HostGroupRequest {
     private long id;
     private String name;
     private long size;
 
-    public HostGroupRequest() {
-        this.size = 3L;
-    }
-
     public HostGroupRequest(long id, String name, long size) {
         this.id = id;
         this.name = name;
-        this.size = Math.max(3L, (long) Math.pow(2,Math.ceil(Math.log(size))));
+        this.size = MathOperations.preferable(size);
 
     }
 
     public void setSize(long size) {
-        this.size = Math.max(3L, (long) Math.pow(2,Math.ceil(Math.log(size))));
+        this.size =MathOperations.preferable(size);
     }
 
 
