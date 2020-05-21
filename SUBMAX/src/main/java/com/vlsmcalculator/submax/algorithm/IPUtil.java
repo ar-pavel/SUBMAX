@@ -37,12 +37,19 @@ public class IPUtil {
     }
 
     public static int getCIDR(long address){
+        System.err.println("For : " + address);
         int cidr = 1;
-        while(true){
-            if (((address >>> cidr) & 1) != 0) {
-                break;
-            }
+        long host = 2;
+//        while(true){
+//            if (((address >>> cidr) & 1) != 0) {
+//                break;
+//            }
+//            ++cidr;
+//        }
+        while(host < address){
             ++cidr;
+            host*=2;
+            System.err.println(cidr + "\t" + host);
         }
         System.err.println(address + "\t" + cidr);
         return  32-cidr;

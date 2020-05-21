@@ -1,14 +1,10 @@
 package com.vlsmcalculator.submax.algorithm;
 
-import com.vlsmcalculator.submax.exception.NotEnoughSpace;
-import com.vlsmcalculator.submax.model.HostGroupRequest;
 import com.vlsmcalculator.submax.model.HostGroupResponse;
 import com.vlsmcalculator.submax.model.IP;
 import com.vlsmcalculator.submax.playload.Request;
 import com.vlsmcalculator.submax.playload.Response;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class IPAssigner {
@@ -22,12 +18,6 @@ public class IPAssigner {
 
         response.setHostGroup(request.getHostGroup().stream().map(
                 hostGroupRequest -> {
-                    if(currentIp.getCidr()<0)
-                        try {
-                            throw new NotEnoughSpace("Not Enough Space!");
-                        } catch (NotEnoughSpace notEnoughSpace) {
-//                            notEnoughSpace.printStackTrace();
-                        }
 
                     HostGroupResponse hostGroupResponse = new HostGroupResponse();
                     hostGroupResponse.setId(hostGroupRequest.getId());
@@ -35,7 +25,7 @@ public class IPAssigner {
                     hostGroupResponse.setSize(hostGroupRequest.getSize());
 
                     /// Assign IP to this host group
-                    hostGroupResponse.setNetworkAddress(currentIp);
+                    hostGroupResponse.setNetworkAddress(new IP(currentIp.getAddressValue(), IPUtil.getCIDR(hostGroupRequest.getSize())));
 
                     /// Calculate Gateway
                     hostGroupResponse.setGatewayAddress(IPUtil.getGatewayAddress(hostGroupResponse.getNetworkAddress()));
@@ -44,8 +34,10 @@ public class IPAssigner {
                     hostGroupResponse.setBroadcast(IPUtil.getBroadcastAddress(hostGroupResponse.getNetworkAddress(),hostGroupRequest.getSize()));
 
                     // Update Current IP to Next Available NetID
-                    currentIp = new IP(currentIp.getAddressValue() + hostGroupRequest.getSize());
+                    currentIp = new IP(currentIp.getAddressValue() + hostGroupRequest.getSize(),
+                            IPUtil.getCIDR(hostGroupRequest.getSize()));
 
+                    System.err.println(currentIp);
                     return hostGroupResponse;
                 }
         ).collect(Collectors.toList()));

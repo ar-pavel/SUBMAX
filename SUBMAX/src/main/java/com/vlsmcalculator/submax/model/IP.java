@@ -14,7 +14,8 @@ public class IP {
 
     public IP(long addressValue){
         this.addressValue = addressValue;
-        this.cidr = IPUtil.getCIDR(addressValue);
+//        this.cidr = IPUtil.getCIDR(addressValue);
+        this.cidr = 0;
         this.addressNotation = IPUtil.getIPNotation(this.addressValue, this.cidr);
     }
 
