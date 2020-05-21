@@ -44,8 +44,7 @@ public class IPAssigner {
                     hostGroupResponse.setBroadcast(IPUtil.getBroadcastAddress(hostGroupResponse.getNetworkAddress(),hostGroupRequest.getSize()));
 
                     // Update Current IP to Next Available NetID
-                    currentIp = new IP(currentIp.getAddressValue() + hostGroupRequest.getSize(),
-                            IPUtil.getCIDR(hostGroupResponse.getBroadcast().getAddressValue()+1));
+                    currentIp = new IP(currentIp.getAddressValue() + hostGroupRequest.getSize());
 
                     return hostGroupResponse;
                 }
