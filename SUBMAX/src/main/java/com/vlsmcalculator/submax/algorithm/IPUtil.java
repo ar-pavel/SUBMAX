@@ -2,7 +2,6 @@ package com.vlsmcalculator.submax.algorithm;
 
 import com.vlsmcalculator.submax.model.IP;
 
-// IP UTIL: created by @TanvirSojal
 public class IPUtil {
 
     public static IP processISPIP(IP ip){
@@ -11,6 +10,7 @@ public class IPUtil {
         return ip;
     }
 
+    // This function was written by @TanvirSojal
     public static String getIPNotation(long address, int cidr){
         StringBuilder ip = new StringBuilder();
         // mask one octet (8-bit) at a time
@@ -48,7 +48,7 @@ public class IPUtil {
 //        return  32-cidr;
 //    }
 
-//     From broadcast
+    //     From broadcast
     public static int getCIDR(long address){
         int cidr = 31;
         while (((address >>> cidr) & 1) != 0) {
@@ -60,3 +60,5 @@ public class IPUtil {
 
 
 }
+
+
