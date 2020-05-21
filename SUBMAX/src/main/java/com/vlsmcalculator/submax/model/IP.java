@@ -8,13 +8,13 @@ import lombok.*;
 @NoArgsConstructor
 @Setter @Getter
 public class IP {
-    protected long addressValue;
-    protected String addressNotation;
-    protected int cidr;
+    private long addressValue;
+    private String addressNotation;
+    private int cidr;
 
     public IP(long addressValue){
         this.addressValue = addressValue;
-        this.cidr = 0;
+        this.cidr = IPUtil.getCIDR(addressValue);
         this.addressNotation = IPUtil.getIPNotation(this.addressValue, this.cidr);
     }
 

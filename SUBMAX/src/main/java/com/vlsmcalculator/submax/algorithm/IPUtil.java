@@ -2,8 +2,15 @@ package com.vlsmcalculator.submax.algorithm;
 
 import com.vlsmcalculator.submax.model.IP;
 
-// IP UTIL class created by @Tanvir Sojal
+// IP UTIL: created by @TanvirSojal
 public class IPUtil {
+
+    public static IP processISPIP(IP ip){
+        // TO DO preprocess and calculate decimal value
+
+        return ip;
+    }
+
     public static String getIPNotation(long address, int cidr){
         StringBuilder ip = new StringBuilder();
         // mask one octet (8-bit) at a time
@@ -28,4 +35,28 @@ public class IPUtil {
     public static IP getBroadcastAddress(IP networkAddress, long groupSize){
         return new IP(networkAddress.getAddressValue() + groupSize - 1, networkAddress.getCidr());
     }
+
+//    public static int getCIDR(long address){
+//        int cidr = 1;
+//        while(true){
+//            if (((address >>> cidr) & 1) != 0) {
+//                break;
+//            }
+//            ++cidr;
+//        }
+//        System.err.println(address + "\t" + cidr);
+//        return  32-cidr;
+//    }
+
+//     From broadcast
+    public static int getCIDR(long address){
+        int cidr = 31;
+        while (((address >>> cidr) & 1) != 0) {
+            --cidr;
+        }
+        System.err.println(address + "\t" + cidr);
+        return  cidr;
+    }
+
+
 }

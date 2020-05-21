@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 public class IPAssigner {
     public static IP currentIp;
 
-    public static Response AssignIP(Request request) throws NotEnoughSpace{
+    public static Response AssignIP(Request request) {
         Response response = new Response();
-        response.setSourceNetworkAddress(request.getSourceNetworkAddress());
+        response.setSourceNetworkAddress(IPUtil.processISPIP(request.getSourceNetworkAddress()));
 
-        currentIp = new IP(request.getSourceNetworkAddress().getAddressValue(),request.getSourceNetworkAddress().getCidr());
+        currentIp = new IP(request.getSourceNetworkAddress().getAddressValue());
 
         response.setHostGroup(request.getHostGroup().stream().map(
                 hostGroupRequest -> {
@@ -28,7 +28,6 @@ public class IPAssigner {
                         } catch (NotEnoughSpace notEnoughSpace) {
 //                            notEnoughSpace.printStackTrace();
                         }
-
 
                     HostGroupResponse hostGroupResponse = new HostGroupResponse();
                     hostGroupResponse.setId(hostGroupRequest.getId());
@@ -45,7 +44,8 @@ public class IPAssigner {
                     hostGroupResponse.setBroadcast(IPUtil.getBroadcastAddress(hostGroupResponse.getNetworkAddress(),hostGroupRequest.getSize()));
 
                     // Update Current IP to Next Available NetID
-                    currentIp = new IP(currentIp.getAddressValue() + hostGroupRequest.getSize(), (int) (32 - MathOperations.bitReq(currentIp.getCidr())));
+                    currentIp = new IP(currentIp.getAddressValue() + hostGroupRequest.getSize(),
+                            IPUtil.getCIDR(hostGroupResponse.getBroadcast().getAddressValue()+1));
 
                     return hostGroupResponse;
                 }
