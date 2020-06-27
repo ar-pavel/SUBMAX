@@ -21,3 +21,8 @@ group.
     1. Upload gns3 project file(s) and the host groups from there will be calculated automatically for you.
    2. The host groups will be identified by their interface with router in this format Name1_port_Name1_port . For example: Router1_0_Switch2_1
    3. You can upload multiple gns3 files, and alloc
+
+
+##### Contributors: 
+ - [@TanvirSojal](https://github.com/TanvirSojal)
+ - [Pavel](https://github.com/ar-pavel)
