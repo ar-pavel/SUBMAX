@@ -1,5 +1,5 @@
 # SUBMAX
-IPV4 Subnet-Calculator RESTfull API
+`IPV4 Subnet-Calculator` 
 
 *version 1.1*
 
